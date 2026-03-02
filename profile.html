@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile – Gokulnath | NexLearn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:        #0a0824;
+      --bg-secondary:      #14113a;
+      --bg-tertiary:       #1e1a52;
+      --surface:           rgba(20, 17, 58, 0.68);
+      --surface-heavy:     rgba(30, 26, 82, 0.82);
+      --accent:            #00eaff;
+      --accent-glow:       rgba(0, 234, 255, 0.32);
+      --accent-dark:       #00c0d8;
+      --purple:            #c084fc;
+      --purple-glow:       rgba(192, 132, 252, 0.32);
+      --purple-dark:       #a855f7;
+      --red-glow:          rgba(239, 68, 68, 0.28);
+      --green-glow:        rgba(34, 197, 94, 0.28);
+      --text-primary:      #f1f1ff;
+      --text-secondary:    #c3c3e8;
+      --text-tertiary:     #8a8ab8;
+      --glass:             rgba(255,255,255,0.058);
+      --glass-border:      rgba(255,255,255,0.115);
+      --border-radius:     20px;
+      --border-radius-lg:  28px;
+      --border-radius-xl:  36px;
+      --shadow-soft:       0 10px 40px rgba(0,0,0,0.42);
+      --shadow-glow:       0 0 48px var(--accent-glow);
+      --transition:        all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast:   all 0.24s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-primary:        #f6f8ff;
+      --bg-secondary:      #eef2ff;
+      --bg-tertiary:       #e0e6ff;
+      --surface:           rgba(245, 248, 255, 0.84);
+      --surface-heavy:     rgba(230, 235, 255, 0.94);
+      --text-primary:      #1a1a4a;
+      --text-secondary:    #3a3a7a;
+      --text-tertiary:     #5a5a9a;
+      --glass:             rgba(255,255,255,0.82);
+      --glass-border:      rgba(90,90,220,0.2);
+      --accent:            #0066bb;
+      --accent-glow:       rgba(0,102,187,0.24);
+      --purple:            #7c3aed;
+      --purple-glow:       rgba(124,58,237,0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary), #1c1348 50%, var(--bg-primary));
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(18px) saturate(190%);
+      -webkit-backdrop-filter: blur(18px) saturate(190%);
+      background: var(--glass);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 82px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 220% auto;
+      animation: gradientFlow 12s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -9px;
+      left: 0;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      border-radius: 3px;
+      transition: width 0.45s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .icon-btn {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--accent);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-glow);
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 0 28px var(--accent-glow);
+    }
+
+    main {
+      padding-top: 140px;
+      padding-bottom: 100px;
+    }
+
+    .profile-hero {
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1.8rem;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid var(--surface-heavy);
+      box-shadow: 0 0 60px rgba(0,234,255,0.25), inset 0 0 20px rgba(0,0,0,0.4);
+      transition: var(--transition);
+    }
+
+    .avatar:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 90px var(--accent-glow);
+    }
+
+    .edit-avatar-btn {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: #000;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--surface);
+      cursor: pointer;
+      box-shadow: 0 8px 24px var(--accent-glow);
+      transition: var(--transition);
+    }
+
+    .edit-avatar-btn:hover {
+      transform: scale(1.15) rotate(15deg);
+    }
+
+    .profile-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+      background: linear-gradient(90deg, #ffffff, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.6rem;
+    }
+
+    .profile-handle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+    }
+
+    .profile-bio {
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .profile-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2.5rem 4rem;
+      margin: 2.5rem 0 4rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1.05rem;
+      color: var(--text-tertiary);
+      margin-top: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 2.2rem;
+      text-align: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2.2rem;
+      margin-bottom: 5rem;
+    }
+
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      padding: 2.4rem;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      inset: -80%;
+      background: radial-gradient(circle at 30% 20%, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+
+    .profile-card:hover::before {
+      opacity: 0.65;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-14px);
+      box-shadow: var(--shadow-soft), 0 0 70px var(--accent-glow);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .badge {
+      background: linear-gradient(45deg, #2a1f5e, #3a2f7e);
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid var(--purple-glow);
+      box-shadow: 0 0 20px rgba(160,100,255,0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge.gold   { background: linear-gradient(45deg, #f59e0b, #fbbf24); color: #1a1a2e; }
+    .badge.silver { background: linear-gradient(45deg, #94a3b8, #cbd5e1); color: #0f172a; }
+    .badge.bronze { background: linear-gradient(45deg, #b45309, #d97706); color: #1e293b; }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .achievement-item {
+      text-align: center;
+      padding: 1.8rem 1rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    .achievement-item:hover {
+      transform: translateY(-8px) scale(1.05);
+      background: var(--surface-heavy);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 40px var(--purple-glow);
+    }
+
+    .achievement-icon {
+      font-size: 3.8rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 12px var(--purple-glow));
+    }
+
+    .achievement-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .achievement-date {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .settings-form {
+      background: var(--surface);
+      border-radius: var(--border-radius-lg);
+      padding: 2.8rem;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 1rem 1.4rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      transition: var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 1rem 2.4rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: #000;
+      box-shadow: 0 12px 36px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 24px 60px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-glow);
+      color: #000;
+    }
+
+    .danger-zone {
+      margin-top: 6rem;
+      padding: 2.5rem;
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: var(--border-radius-lg);
+    }
+
+    .danger-title {
+      color: #ef4444;
+      font-size: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { flex-direction: column; height: auto; padding: 1.4rem 0; }
+      .nav-left, .nav-right { width: 100%; justify-content: space-between; margin: 1rem 0; }
+      .profile-stats { gap: 2rem 3rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <nav class="container">
+      <div class="nav-left">
+        <a href="index.html" class="logo">NexLearn</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="my-courses.html" class="nav-link">My Courses</a>
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="profile.html" class="nav-link active">Profile</a>
+
+        <button class="icon-btn" title="Notifications">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9z"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- PROFILE HERO -->
+    <section class="profile-hero">
+      <div class="avatar-container">
+        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop" alt="Gokulnath" class="avatar">
+        <button class="edit-avatar-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <h1 class="profile-name">Gokulnath</h1>
+      <div class="profile-handle">@gokulnath_dev • Chennai, India</div>
+
+      <p class="profile-bio">
+        Full-stack developer & lifelong learner • Passionate about AI, quantum computing, and futuristic UI/UX • Building tomorrow's education experience with NexLearn.
+      </p>
+
+      <div class="profile-stats">
+        <div class="stat-item">
+          <div class="stat-number">142</div>
+          <div class="stat-label">Courses Started</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">87</div>
+          <div class="stat-label">Courses Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">218</div>
+          <div class="stat-label">Days Learned</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.92</div>
+          <div class="stat-label">Avg. Rating</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section>
+      <h2 class="section-title">Achievements & Badges</h2>
+
+      <div class="card-grid">
+        <div class="profile-card">
+          <div class="card-header">
+            <h3 class="card-title">Top Badges</h3>
+          </div>
+          <div class="badge-list">
+            <div class="badge gold"><span>🏆</span> Master Learner</div>
+            <div class="badge gold"><span>🔥</span> 100-Day Streak</div>
+            <div class="badge silver"><span>🧠</span> AI Pioneer</div>
+            <div class="badge silver"><span>⚡</span> Speed Runner</div>
+            <div class="badge bronze"><span>🌌</span> Quantum Explorer</div>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="card-header">
+            <h3 class="card-title">Recent Milestones</h3>
+          </div>
+          <div class="achievement-grid">
+            <div class="achievement-item">
+              <div class="achievement-icon">🚀</div>
+              <div class="achievement-name">First Launch</div>
+              <div class="achievement-date">Jan 12, 2026</div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-icon">🔥</div>
+              <div class="achievement-name">90 Days</div>
+              <div class="achievement-date">Feb 28, 2026</div>
+            </div>
+            <div class="achievement-item">
+              <div class="achievement-icon">🧠</div>
+              <div class="achievement-name">AI Expert</div>
+              <div class="achievement-date">Mar 01, 2026</div>
+            </div>
+            <!-- more items to increase density -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONAL SETTINGS -->
+    <section style="margin-top: 6rem;">
+      <h2 class="section-title">Account Settings</h2>
+
+      <form class="settings-form">
+        <div class="form-group">
+          <label class="form-label">Display Name</label>
+          <input type="text" class="form-input" value="Gokulnath" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" value="gokulnath@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bio</label>
+          <textarea class="form-textarea">Full-stack developer exploring AI, quantum tech & next-gen education platforms.</textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-input" value="Chennai, Tamil Nadu, India">
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 3rem;">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="button" class="btn btn-outline">Cancel</button>
+        </div>
+      </form>
+
+      <div class="danger-zone">
+        <h3 class="danger-title">Danger Zone</h3>
+        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+          Once deleted, your account and all progress, certificates, and achievements cannot be recovered.
+        </p>
+        <button class="btn" style="background:#ef4444; color:white; box-shadow:0 0 30px var(--red-glow);">
+          Delete Account
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="padding:6rem 0 4rem; text-align:center; border-top:1px solid var(--glass-border); background:var(--glass); backdrop-filter:blur(24px);">
+    <div class="container">
+      <div class="logo" style="font-size:3.5rem; margin-bottom:1.6rem; opacity:0.92;">NexLearn</div>
+      <p style="color:var(--text-secondary); max-width:680px; margin:0 auto 2.5rem; font-size:1.15rem;">
+        Redefining education for the AI era — personalized, immersive, and built for lifelong learners.
+      </p>
+      <p style="color:var(--text-tertiary); font-size:1rem;">
+        © 2026 NexLearn • Chennai-inspired, future-built
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme persistence
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('nexlearn-theme', next);
+    }
+
+    const saved = localStorage.getItem('nexlearn-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+
+    // Micro-interactions on load
+    window.addEventListener('load', () => {
+      // Fade in avatar & name
+      const avatar = document.querySelector('.avatar');
+      const name = document.querySelector('.profile-name');
+
+      if (avatar) {
+        avatar.style.opacity = '0';
+        avatar.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+          avatar.style.transition = 'all 1.2s cubic-bezier(0.16,1,0.3,1)';
+          avatar.style.opacity = '1';
+          avatar.style.transform = 'scale(1)';
+        }, 300);
+      }
+
+      if (name) {
+        name.style.opacity = '0';
+        name.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+          name.style.transition = 'all 1s ease-out';
+          name.style.opacity = '1';
+          name.style.transform = 'translateY(0)';
+        }, 600);
+      }
+
+      // Stagger badge & achievement entrance
+      document.querySelectorAll('.badge, .achievement-item').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(25px)';
+        setTimeout(() => {
+          el.style.transition = 'all 0.8s cubic-bezier(0.16,1,0.3,1)';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 100 + i * 80);
+      });
+    });
+
+    // Fake form feedback (demo)
+    document.querySelector('.settings-form')?.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Profile updated successfully! (Demo)');
+    });
+  </script>
+</body>
+</html>

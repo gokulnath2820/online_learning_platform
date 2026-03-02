@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate – Advanced Machine Learning 2026 – NexLearn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:        #0a0824;
+      --bg-secondary:      #14113a;
+      --bg-tertiary:       #1e1a52;
+      --surface:           rgba(20, 17, 58, 0.82);
+      --surface-heavy:     rgba(30, 26, 82, 0.98);
+      --accent:            #00eaff;
+      --accent-glow:       rgba(0, 234, 255, 0.46);
+      --accent-dark:       #00c0d8;
+      --purple:            #c084fc;
+      --purple-glow:       rgba(192, 132, 252, 0.46);
+      --purple-dark:       #a855f7;
+      --gold:              #fbbf24;
+      --gold-glow:         rgba(251, 191, 36, 0.38);
+      --text-primary:      #f1f1ff;
+      --text-secondary:    #c3c3e8;
+      --text-tertiary:     #8a8ab8;
+      --glass:             rgba(255,255,255,0.09);
+      --glass-border:      rgba(255,255,255,0.15);
+      --border-radius:     28px;
+      --border-radius-lg:  40px;
+      --border-radius-xl:  54px;
+      --shadow-soft:       0 24px 72px rgba(0,0,0,0.58);
+      --shadow-glow:       0 0 104px var(--accent-glow);
+      --transition:        all 0.54s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast:   all 0.38s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-primary:        #fdffff;
+      --bg-secondary:      #f5f9ff;
+      --bg-tertiary:       #e9efff;
+      --surface:           rgba(255, 255, 255, 0.96);
+      --surface-heavy:     rgba(255, 255, 255, 1.00);
+      --text-primary:      #1a1a4a;
+      --text-secondary:    #3a3a7a;
+      --text-tertiary:     #5a5a9a;
+      --glass:             rgba(255,255,255,0.96);
+      --glass-border:      rgba(20,20,220,0.34);
+      --accent:            #001144;
+      --accent-glow:       rgba(0,17,68,0.38);
+      --purple:            #7c3aed;
+      --purple-glow:       rgba(124,58,237,0.34);
+      --gold:              #d97706;
+      --gold-glow:         rgba(217, 119, 6, 0.30);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(165deg, var(--bg-primary), #2a205a 85%, var(--bg-primary));
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.72;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 0 52px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(32px) saturate(260%);
+      -webkit-backdrop-filter: blur(32px) saturate(260%);
+      background: var(--glass);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 96px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.9rem;
+      font-weight: 700;
+      letter-spacing: 3.2px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 360% auto;
+      animation: gradientFlow 24s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3.8rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.25rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4.2px;
+      bottom: -14px;
+      left: 0;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      border-radius: 4.2px;
+      transition: width 0.7s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .icon-btn {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--accent);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(24px);
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-glow);
+      transform: translateY(-10px) scale(1.24);
+      box-shadow: 0 0 56px var(--accent-glow);
+    }
+
+    main {
+      padding-top: 190px;
+      padding-bottom: 160px;
+    }
+
+    .certificate-hero {
+      text-align: center;
+      margin-bottom: 6rem;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(4.5rem, 10vw, 8rem);
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--gold), var(--accent), var(--purple), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+      margin-bottom: 1.8rem;
+      background-size: 400%;
+      animation: gradientFlow 28s ease infinite;
+      text-shadow: 0 0 80px var(--gold-glow);
+    }
+
+    .congrats-text {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .certificate-container {
+      max-width: 1100px;
+      margin: 0 auto 6rem;
+      perspective: 1800px;
+    }
+
+    .certificate-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f0c29 100%);
+      border: 12px solid transparent;
+      border-image: linear-gradient(45deg, var(--gold), var(--purple), var(--accent)) 1;
+      border-radius: 38px;
+      padding: 5rem 6rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7), 0 0 140px var(--gold-glow);
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+    }
+
+    .certificate-card:hover {
+      transform: rotateX(6deg) rotateY(8deg) scale(1.03);
+    }
+
+    .certificate-watermark {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      pointer-events: none;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><text x="50%" y="50%" font-family="Orbitron" font-size="80" fill="%23ffffff" text-anchor="middle" dominant-baseline="middle" transform="rotate(-45 150 150)">NEXLEARN</text></svg>') repeat;
+    }
+
+    .certificate-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .certificate-seal {
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 3rem;
+      background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 120px var(--gold-glow), inset 0 0 40px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .certificate-seal::before {
+      content: 'CERTIFIED';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #000;
+      text-shadow: 0 0 30px #fff;
+      letter-spacing: 6px;
+    }
+
+    .recipient-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--gold), var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 2rem 0 1.5rem;
+      line-height: 1.1;
+    }
+
+    .course-completed {
+      font-size: 2.6rem;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .issue-date {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 4rem;
+    }
+
+    .signature-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 4rem auto 0;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .signature {
+      text-align: center;
+    }
+
+    .sig-line {
+      width: 320px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--purple), transparent);
+      margin: 1rem auto;
+    }
+
+    .sig-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .sig-title {
+      font-size: 1.15rem;
+      color: var(--text-tertiary);
+    }
+
+    .qr-section {
+      margin-top: 6rem;
+      text-align: center;
+    }
+
+    .qr-code {
+      width: 220px;
+      height: 220px;
+      background: #fff;
+      margin: 2rem auto;
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 0 60px rgba(0,0,0,0.6);
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 5rem;
+    }
+
+    .share-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--glass);
+      border: 2px solid var(--glass-border);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(18px);
+    }
+
+    .share-btn:hover {
+      transform: translateY(-12px) scale(1.2);
+      background: var(--accent-glow);
+      box-shadow: 0 0 60px var(--accent-glow);
+    }
+
+    .confetti-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall linear forwards;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .certificate-card { padding: 4rem 4rem; }
+      .recipient-name { font-size: 4rem; }
+    }
+
+    @media (max-width: 768px) {
+      nav { flex-direction: column; height: auto; padding: 2.8rem 0; }
+      .nav-links { margin: 2.2rem 0; flex-direction: column; gap: 2.2rem; }
+      .certificate-card { padding: 3.5rem 2.5rem; }
+      .hero-title { font-size: 5.2rem; }
+      .signature-row { flex-direction: column; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">NexLearn</a>
+
+      <div class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="my-courses.html" class="nav-link active">My Courses</a>
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <section class="certificate-hero">
+      <h1 class="hero-title">Certificate of Completion</h1>
+      <div class="congrats-text">Congratulations, Gokulnath!</div>
+      <p style="font-size:1.8rem; color:var(--text-secondary); max-width:800px; margin:2rem auto;">
+        You've successfully completed the course and demonstrated mastery in cutting-edge AI technologies.
+      </p>
+    </section>
+
+    <div class="certificate-container">
+      <div class="certificate-card" id="certCard">
+
+        <div class="certificate-watermark"></div>
+
+        <div class="certificate-content">
+          <div class="certificate-seal">
+            <!-- Seal content is in ::before pseudo -->
+          </div>
+
+          <div style="font-size:2.2rem; color:var(--text-secondary); margin-bottom:1rem;">This is to certify that</div>
+
+          <h2 class="recipient-name">Gokulnath</h2>
+
+          <div class="course-completed">
+            has successfully completed
+          </div>
+
+          <div style="font-size:3.8rem; font-weight:900; color:var(--gold); margin:2rem 0; line-height:1.2;">
+            Advanced Machine Learning & LLM Engineering 2026
+          </div>
+
+          <div style="font-size:1.8rem; color:var(--text-secondary); margin:3rem 0;">
+            Awarded on <strong>March 02, 2026</strong> • Certificate ID: NLX-2026-ML-784392
+          </div>
+
+          <div class="signature-row">
+            <div class="signature">
+              <div class="sig-line"></div>
+              <div class="sig-name">Dr. Elena Voss</div>
+              <div class="sig-title">Lead Instructor & AI Research Director</div>
+            </div>
+
+            <div class="signature">
+              <div class="sig-line"></div>
+              <div class="sig-name">NexLearn Academic Board</div>
+              <div class="sig-title">Certified & Verified</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qr-section">
+      <h3 style="font-size:2.2rem; color:var(--accent); margin-bottom:2rem;">Verify on Blockchain</h3>
+      <div class="qr-code">
+        <!-- In real app this would be a real QR code linking to on-chain verification -->
+        <div style="width:100%; height:100%; background:#000; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#0f0; font-family:'Roboto Mono'; font-size:1.8rem;">
+          QR VERIFICATION
+        </div>
+      </div>
+      <p style="color:var(--text-tertiary); margin-top:1.5rem;">Scan to verify authenticity on Ethereum / Polygon</p>
+    </div>
+
+    <div class="share-buttons">
+      <div class="share-btn" title="Share on X">𝕏</div>
+      <div class="share-btn" title="Share on LinkedIn">in</div>
+      <div class="share-btn" title="Download PDF">↓</div>
+      <div class="share-btn" title="Add to Wallet">💼</div>
+    </div>
+
+  </main>
+
+  <!-- CONFETTI LAYER -->
+  <div class="confetti-layer" id="confetti"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo logo">NexLearn</div>
+      <p style="color:var(--text-secondary); max-width:1000px; margin:0 auto 5rem; font-size:1.5rem;">
+        Celebrating your achievement — the future belongs to those who keep learning.
+      </p>
+      <p style="color:var(--text-tertiary); font-size:1.25rem;">
+        © 2026 NexLearn • Chennai • Knowledge without limits
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle + persistence
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('nexlearn-theme', next);
+    }
+
+    const savedTheme = localStorage.getItem('nexlearn-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Confetti celebration on load
+    function createConfetti() {
+      const confettiLayer = document.getElementById('confetti');
+      for (let i = 0; i < 180; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.background = `hsl(${Math.random()*360}, 100%, 60%)`;
+        particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        confettiLayer.appendChild(particle);
+
+        setTimeout(() => particle.remove(), 8000);
+      }
+    }
+
+    window.addEventListener('load', () => {
+      createConfetti();
+
+      // 3D card tilt on mouse move
+      const card = document.querySelector('.certificate-card');
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+      });
+
+      // Stagger entrance
+      document.querySelectorAll('.certificate-content > *').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(80px)';
+        setTimeout(() => {
+          el.style.transition = 'all 1.4s cubic-bezier(0.16,1,0.3,1)';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 400 + i * 220);
+      });
+    });
+  </script>
+</body>
+</html>

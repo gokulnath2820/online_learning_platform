@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NexLearn – Future of Personalized Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f0c29;
+      --bg-secondary: #1a173f;
+      --accent: #00f0ff;
+      --accent-glow: #00f0ff33;
+      --purple: #a78bfa;
+      --purple-glow: #a78bfa44;
+      --text-primary: #e0e0ff;
+      --text-secondary: #a0a0cc;
+      --glass: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.12);
+      --shadow-neum: 8px 8px 16px #0b0820, -8px -8px 16px #130e38;
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    [data-theme="light"] {
+      --bg-primary: #f0f2ff;
+      --bg-secondary: #e0e4ff;
+      --text-primary: #1a1a4d;
+      --text-secondary: #4a4a8c;
+      --glass: rgba(255,255,255,0.75);
+      --glass-border: rgba(100,100,255,0.2);
+      --shadow-neum: 6px 6px 12px #d0d4ff, -6px -6px 12px #ffffff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary), #24243e);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 5vw; }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: var(--glass);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 0;
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: -6px; left: 0;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .theme-toggle, .auth-btn {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--accent);
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(8px);
+    }
+    .theme-toggle:hover, .auth-btn:hover {
+      background: var(--accent-glow);
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-2px);
+    }
+    .hero {
+      padding: 18vh 0 12vh;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 9rem);
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(90deg, #fff, var(--accent), var(--purple), #fff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 300%;
+      animation: gradientFlow 12s ease infinite;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes gradientFlow {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      color: var(--text-secondary);
+    }
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary, .btn-outline {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: #000;
+      box-shadow: 0 10px 30px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 20px 50px var(--accent-glow);
+    }
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-glow);
+      color: #000;
+    }
+    .features {
+      padding: 10rem 0;
+      background: linear-gradient(to bottom, transparent, var(--bg-secondary) 20%, var(--bg-secondary));
+    }
+    .section-title {
+      text-align: center;
+      font-size: 3.5rem;
+      margin-bottom: 4rem;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+    }
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, var(--accent-glow), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.6s;
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+    }
+    .card h3 {
+      font-size: 1.8rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--accent);
+    }
+    .courses-showcase {
+      padding: 10rem 0;
+    }
+    .course-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #1e1b4b, #0f0c29);
+      position: relative;
+    }
+    .course-img {
+      height: 220px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: white;
+      font-family: 'Orbitron';
+    }
+    .course-content {
+      padding: 2rem;
+    }
+    .course-title {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .instructor {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .stats {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .testimonials {
+      padding: 10rem 0;
+      background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+    }
+    .quote {
+      font-style: italic;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+    }
+    footer {
+      padding: 6rem 0 3rem;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 4.5rem; }
+      .cta-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="container">
+      <div class="logo">NexLearn</div>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="#features">Features</a>
+        <a href="#courses">Courses</a>
+        <a href="#testimonials">Testimonials</a>
+      </div>
+      <div style="display:flex; gap:1rem;">
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+        <a href="login.html" class="auth-btn">Login</a>
+        <a href="register.html" class="btn-primary">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Unlock Your Potential with AI-Powered Learning</h1>
+      <p>Personalized paths. Immersive courses. Next-generation education platform built for tomorrow's leaders.</p>
+      <div class="cta-group">
+        <a href="register.html" class="btn-primary">Start Learning Free</a>
+        <a href="#courses" class="btn-outline">Explore Courses</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Why NexLearn?</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>AI Personalization</h3>
+          <p>Adaptive learning paths adjust in real-time based on your progress, style, and goals.</p>
+        </div>
+        <div class="card">
+          <h3>Immersive Experience</h3>
+          <p>Glassmorphic UI, micro-interactions, and cinematic course presentation.</p>
+        </div>
+        <div class="card">
+          <h3>Community & Achievements</h3>
+          <p>Streaks, badges, leaderboards, live study groups, and NFT-style certificates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="courses-showcase" id="courses">
+    <div class="container">
+      <h2 class="section-title">Featured Courses</h2>
+      <div class="grid-3">
+        <div class="course-card">
+          <div class="course-img">AI/ML</div>
+          <div class="course-content">
+            <h3 class="course-title">Advanced Machine Learning 2026</h3>
+            <div class="instructor">Dr. Elena Voss • 4.9 ★</div>
+            <div class="stats">
+              <span>12k+ students</span>
+              <span>18 hours</span>
+            </div>
+          </div>
+        </div>
+        <!-- 5 more similar course cards would go here to increase length & richness -->
+        <div class="course-card">
+          <div class="course-img">Quantum</div>
+          <div class="course-content">
+            <h3 class="course-title">Quantum Computing Fundamentals</h3>
+            <div class="instructor">Prof. Raj Patel • 4.8 ★</div>
+            <div class="stats">
+              <span>8.4k students</span>
+              <span>22 hours</span>
+            </div>
+          </div>
+        </div>
+        <!-- Repeat pattern for visual density – total cards ~6–8 in real impl. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Learners Say</h2>
+      <div class="testimonial-grid">
+        <div class="card">
+          <p class="quote">"NexLearn transformed how I approach data science. The AI recommendations are scarily accurate!"</p>
+          <p style="text-align:right; color:var(--accent); font-weight:600;">— Aarav Sharma, Data Engineer</p>
+        </div>
+        <!-- 3–5 more testimonials -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="logo" style="font-size:3rem; margin-bottom:1rem;">NexLearn</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p style="margin-top:3rem; color:var(--text-secondary);">© 2026 NexLearn. Powered by the future.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Simple scroll reveal
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

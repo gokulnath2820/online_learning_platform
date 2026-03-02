@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing – NexLearn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary:        #0a0824;
+      --bg-secondary:      #14113a;
+      --bg-tertiary:       #1e1a52;
+      --surface:           rgba(20, 17, 58, 0.80);
+      --surface-heavy:     rgba(30, 26, 82, 0.96);
+      --accent:            #00eaff;
+      --accent-glow:       rgba(0, 234, 255, 0.44);
+      --accent-dark:       #00c0d8;
+      --purple:            #c084fc;
+      --purple-glow:       rgba(192, 132, 252, 0.44);
+      --purple-dark:       #a855f7;
+      --green:             #22c55e;
+      --green-glow:        rgba(34, 197, 94, 0.34);
+      --text-primary:      #f1f1ff;
+      --text-secondary:    #c3c3e8;
+      --text-tertiary:     #8a8ab8;
+      --glass:             rgba(255,255,255,0.085);
+      --glass-border:      rgba(255,255,255,0.145);
+      --border-radius:     26px;
+      --border-radius-lg:  38px;
+      --border-radius-xl:  50px;
+      --shadow-soft:       0 22px 68px rgba(0,0,0,0.56);
+      --shadow-glow:       0 0 96px var(--accent-glow);
+      --transition:        all 0.52s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast:   all 0.36s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-primary:        #fcffff;
+      --bg-secondary:      #f4f8ff;
+      --bg-tertiary:       #e8eeff;
+      --surface:           rgba(255, 255, 255, 0.96);
+      --surface-heavy:     rgba(255, 255, 255, 1.00);
+      --text-primary:      #1a1a4a;
+      --text-secondary:    #3a3a7a;
+      --text-tertiary:     #5a5a9a;
+      --glass:             rgba(255,255,255,0.94);
+      --glass-border:      rgba(30,30,220,0.32);
+      --accent:            #001133;
+      --accent-glow:       rgba(0,17,51,0.36);
+      --purple:            #7c3aed;
+      --purple-glow:       rgba(124,58,237,0.32);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(160deg, var(--bg-primary), #261e58 80%, var(--bg-primary));
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      backdrop-filter: blur(30px) saturate(250%);
+      -webkit-backdrop-filter: blur(30px) saturate(250%);
+      background: var(--glass);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 94px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 340% auto;
+      animation: gradientFlow 22s linear infinite;
+    }
+
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3.6rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.22rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      bottom: -13px;
+      left: 0;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      border-radius: 4px;
+      transition: width 0.65s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .icon-btn {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--accent);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(22px);
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-glow);
+      transform: translateY(-9px) scale(1.22);
+      box-shadow: 0 0 52px var(--accent-glow);
+    }
+
+    main {
+      padding-top: 180px;
+      padding-bottom: 140px;
+    }
+
+    .pricing-hero {
+      text-align: center;
+      margin-bottom: 7rem;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(4rem, 9vw, 7.2rem);
+      background: linear-gradient(90deg, #ffffff, var(--accent), var(--purple), #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      background-size: 350%;
+      animation: gradientFlow 24s ease infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.6rem;
+      max-width: 880px;
+      margin: 0 auto 3rem;
+      color: var(--text-secondary);
+    }
+
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.8rem;
+      margin-bottom: 5rem;
+      background: var(--surface);
+      padding: 1.2rem 2.5rem;
+      border-radius: 60px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .toggle-label {
+      font-size: 1.35rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toggle-label.active {
+      color: var(--accent);
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 80px;
+      height: 42px;
+      background: var(--glass-border);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      border-radius: 50%;
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .toggle-switch.active {
+      background: var(--accent);
+    }
+
+    .toggle-switch.active::before {
+      transform: translateX(38px);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 3rem;
+      margin-bottom: 8rem;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border-radius: var(--border-radius-xl);
+      padding: 3.5rem 3rem;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(24px);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .pricing-card.popular {
+      transform: scale(1.08);
+      z-index: 10;
+      border-color: var(--accent);
+      box-shadow: 0 0 100px var(--accent-glow), var(--shadow-soft);
+    }
+
+    .pricing-card.popular::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -14px;
+      right: 32px;
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: #000;
+      padding: 0.5rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-18px);
+      box-shadow: 0 50px 120px rgba(0,0,0,0.6), 0 0 110px var(--accent-glow);
+    }
+
+    .plan-name {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .plan-price {
+      font-size: 4.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .plan-cycle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 3.5rem;
+    }
+
+    .plan-features li {
+      font-size: 1.22rem;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .check-icon {
+      color: var(--green);
+      font-size: 1.6rem;
+      filter: drop-shadow(0 0 10px var(--green-glow));
+    }
+
+    .cta-btn {
+      width: 100%;
+      padding: 1.6rem;
+      border-radius: 60px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      background: linear-gradient(45deg, var(--accent), var(--purple));
+      color: #000;
+      box-shadow: 0 24px 60px var(--accent-glow);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 48px 120px var(--accent-glow);
+    }
+
+    .cta-btn.outline {
+      background: transparent;
+      border: 3px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .cta-btn.outline:hover {
+      background: var(--accent-glow);
+      color: #000;
+    }
+
+    .faq-section {
+      max-width: 1100px;
+      margin: 10rem auto 0;
+    }
+
+    .faq-title {
+      font-size: 3.5rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border-radius: var(--border-radius-lg);
+      margin-bottom: 1.8rem;
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 2rem 3rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .faq-question:hover {
+      background: var(--accent-glow);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 3rem;
+      transition: max-height 0.7s ease, padding 0.7s ease;
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    .faq-answer.open {
+      max-height: 800px;
+      padding: 2.5rem 3rem;
+    }
+
+    footer {
+      padding: 10rem 0 6rem;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      background: var(--glass);
+      backdrop-filter: blur(40px);
+    }
+
+    .footer-logo {
+      font-size: 4.5rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.96;
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      nav { flex-direction: column; height: auto; padding: 2.5rem 0; }
+      .nav-links { margin: 2rem 0; flex-direction: column; gap: 2rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 4.8rem; }
+      .register-container { padding: 4.5rem 3rem; margin: 0 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">NexLearn</a>
+
+      <div class="nav-links">
+        <a href="explore.html" class="nav-link">Explore</a>
+        <a href="pricing.html" class="nav-link active">Pricing</a>
+        <a href="login.html" class="nav-link">Login</a>
+        <a href="register.html" class="nav-link">Get Started</a>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <section class="pricing-hero">
+      <h1 class="hero-title">Choose Your Plan</h1>
+      <p class="hero-subtitle">Unlock unlimited access to cutting-edge courses, AI-personalized learning paths, certificates, and more. Cancel anytime.</p>
+
+      <div class="toggle-container">
+        <span class="toggle-label active">Monthly</span>
+        <div class="toggle-switch" id="billingToggle"></div>
+        <span class="toggle-label">Yearly <span style="color:var(--green); font-weight:700;">Save 25%</span></span>
+      </div>
+    </section>
+
+    <div class="pricing-grid">
+
+      <!-- Free Plan -->
+      <div class="pricing-card">
+        <h3 class="plan-name">Explorer</h3>
+        <div class="plan-price">$0</div>
+        <div class="plan-cycle">forever free</div>
+
+        <ul class="plan-features">
+          <li><span class="check-icon">✔</span> Access to 20+ free courses</li>
+          <li><span class="check-icon">✔</span> Basic progress tracking</li>
+          <li><span class="check-icon">✔</span> Community forums</li>
+          <li><span class="check-icon">✔</span> Limited AI recommendations</li>
+          <li style="color:var(--text-tertiary);"><span class="check-icon">✘</span> Certificates & badges</li>
+          <li style="color:var(--text-tertiary);"><span class="check-icon">✘</span> Offline access</li>
+        </ul>
+
+        <button class="cta-btn outline">Start for Free</button>
+      </div>
+
+      <!-- Pro Plan (Popular) -->
+      <div class="pricing-card popular">
+        <h3 class="plan-name">Pro</h3>
+        <div class="plan-price monthly">$29</div>
+        <div class="plan-price yearly" style="display:none;">$261 <span style="font-size:1.6rem;">/year</span></div>
+        <div class="plan-cycle monthly">per month</div>
+        <div class="plan-cycle yearly" style="display:none;">billed annually</div>
+
+        <ul class="plan-features">
+          <li><span class="check-icon">✔</span> Unlimited course access</li>
+          <li><span class="check-icon">✔</span> Full AI personalization & paths</li>
+          <li><span class="check-icon">✔</span> Certificates + NFT option</li>
+          <li><span class="check-icon">✔</span> Offline downloads</li>
+          <li><span class="check-icon">✔</span> Priority support</li>
+          <li><span class="check-icon">✔</span> Exclusive masterclasses</li>
+        </ul>
+
+        <button class="cta-btn">Get Pro</button>
+      </div>
+
+      <!-- Enterprise / Team Plan -->
+      <div class="pricing-card">
+        <h3 class="plan-name">Enterprise</h3>
+        <div class="plan-price">Custom</div>
+        <div class="plan-cycle">contact us</div>
+
+        <ul class="plan-features">
+          <li><span class="check-icon">✔</span> Everything in Pro</li>
+          <li><span class="check-icon">✔</span> Team & organization accounts</li>
+          <li><span class="check-icon">✔</span> Admin dashboard & analytics</li>
+          <li><span class="check-icon">✔</span> SSO & SCIM integration</li>
+          <li><span class="check-icon">✔</span> Dedicated support & SLA</li>
+          <li><span class="check-icon">✔</span> Custom branding & courses</li>
+        </ul>
+
+        <button class="cta-btn outline">Contact Sales</button>
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.nextElementSibling.classList.toggle('open')">
+          What is included in the Pro plan?
+          <span style="font-size:2rem;">▼</span>
+        </div>
+        <div class="faq-answer">
+          Unlimited access to every course (including future releases), full AI personalization, certificates with blockchain verification option, offline mode, priority support, exclusive live sessions, and no ads.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.nextElementSibling.classList.toggle('open')">
+          Can I cancel anytime?
+          <span style="font-size:2rem;">▼</span>
+        </div>
+        <div class="faq-answer">
+          Yes — cancel anytime from your account settings. No long-term contracts. If you cancel mid-cycle, you keep access until the end of your current billing period.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.nextElementSibling.classList.toggle('open')">
+          Do you offer refunds?
+          <span style="font-size:2rem;">▼</span>
+        </div>
+        <div class="faq-answer">
+          We offer a 30-day money-back guarantee on all paid plans. Just contact support within 30 days of purchase for a full refund — no questions asked.
+        </div>
+      </div>
+
+      <!-- 4–5 more FAQ items to increase richness -->
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo logo">NexLearn</div>
+      <p style="color:var(--text-secondary); max-width:900px; margin:0 auto 4rem; font-size:1.4rem;">
+        The most advanced learning platform — built for curious minds who want to master tomorrow's technologies today.
+      </p>
+      <p style="color:var(--text-tertiary); font-size:1.2rem;">
+        © 2026 NexLearn • Chennai • Future-forward education
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle + persistence
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('nexlearn-theme', next);
+    }
+
+    const savedTheme = localStorage.getItem('nexlearn-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Billing toggle (monthly/yearly)
+    const toggleSwitch = document.getElementById('billingToggle');
+    const monthlyPrices = document.querySelectorAll('.plan-price.monthly, .plan-cycle.monthly');
+    const yearlyPrices  = document.querySelectorAll('.plan-price.yearly, .plan-cycle.yearly');
+
+    toggleSwitch.addEventListener('click', () => {
+      toggleSwitch.classList.toggle('active');
+
+      if (toggleSwitch.classList.contains('active')) {
+        monthlyPrices.forEach(el => el.style.display = 'none');
+        yearlyPrices.forEach(el => el.style.display = 'block');
+      } else {
+        monthlyPrices.forEach(el => el.style.display = 'block');
+        yearlyPrices.forEach(el => el.style.display = 'none');
+      }
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        answer.classList.toggle('open');
+      });
+    });
+
+    // Card entrance stagger
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.pricing-card').forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(60px)';
+        setTimeout(() => {
+          card.style.transition = 'all 1.2s cubic-bezier(0.16,1,0.3,1)';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 250 + i * 180);
+      });
+    });
+  </script>
+</body>
+</html>
